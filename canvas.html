@@ -1,0 +1,223 @@
+<script xmlns:os="http://ns.opensocial.org/2008/markup" type="text/os-data">
+    <os:PeopleRequest key="Viewer" userId="@viewer" groupId="@self" fields="@all" />
+    <os:PeopleRequest key="Owner" userId="@owner" groupId="@self"/>
+    <os:PeopleRequest key="ViewerFriends" userId="@viewer" groupId="@friends"/>
+    <os:HttpRequest key="httpFriends" href="http://opensocial-demo.vz-modules.net/gadget/backend/externalFriends.json"/>
+</script>
+
+<div id="tabcontainer"></div>
+
+
+<script type="text/javascript">
+    var gadgetId = '__MODULE_ID__';
+
+    var environment = '__ENV_CONTAINER__';
+
+    var backend = 'http://opensocial-demo.vz-modules.net/gadget/backend';
+    
+    gadgets.util.registerOnLoadHandler(function() {
+        gadgets.cache.getCachedCss(['css/main.css']);
+        gadgets.cache.getCachedJs([
+            'lib/jquery-1.4.2.min.js',
+            'lib/log4javascript.js',
+            'js/advertising.js',
+            'js/embedding.js',
+            'js/invite.js',
+            'js/messaging.js',
+            'js/iframe.js',
+            'js/various.js',
+            'js/backend.js',
+            'js/profile_image.js',
+            'js/views.js',
+            'js/opensocial.js',
+            'js/templates.js',
+            'vz_functions.js'
+        ],
+        'vzDemo.controller.init');
+    });
+</script>
+
+
+<div id="content" style="display: none">
+    <div id="messaging" class="body-content">
+        <textarea id="message" rows="3">This message is going to be sent</textarea>
+        <ul>
+            <li><a id="privMessage" href="javascript:;">send private message</a></li>
+            <li><a id="wallpost" href="javascript:;">post to wall</a></li>
+            <li><a id="notification" href="javascript:;">send notification</a></li>
+            <li><a id="statusUpdate" href="javascript:;">send status update</a></li>
+        </ul>
+
+    </div>
+    <div id="embedding" class="body-content">
+        <ul>
+            <li><a id="getEmbedUrl" href="javascript:;">get embed Url</a></li>
+            <li><a id="getStaticUrl" href="javascript:;">get static url</a></li>
+        </ul>
+    </div>
+    <div id="invite" class="body-content">
+        <ul>
+            <li><a id="inviteFriends" href="javascript:;">invite friends</a></li>
+            <li><a id="suggest" href="javascript:;">suggest gadget to friends</a></li>
+            <li><a id="vcard" href="javascript:;">show current vcard</a></li>
+        </ul>
+    </div>
+    <div id="advertising" class="body-content">
+        <ul>
+            <li><a id="adTag" href="javascript:;">get ad tag</a></li>
+            <li><a id="paymentInterstitial" href="javascript:;">request payment interstitial</a></li>
+        </ul>
+    </div>
+    <div id="views" class="body-content">
+        <ul>
+            <li><a id="requestNavigateTo" href="javascript:;">requestNavigateTo</a></li>
+            <li><a id="requestNavigateToIntegration" href="javascript:;">requestNavigateToIntegration</a></li>
+            <li><a id="openPopup" href="javascript:;">openPopup</a></li>
+            <li><a id="getViewParams" href="javascript:;">getViewParams</a></li>
+            <li><a id="getCurrentView" href="javascript:;">getCurrentView</a></li>
+            <li><a id="getSupportedViews" href="javascript:;">getSupportedViews</a></li>
+        </ul>
+    </div>
+    <div id="various" class="body-content">
+        <ul>
+            <li><a id="adjustHeight" href="javascript:;">adjustHeight</a></li>
+            <li><a id="createStaticMessage" href="javascript:;">createStaticMessage</a></li>
+            <li><a id="dismissMessage" href="javascript:;">dismissMessage</a></li>
+            <li><a id="createTimerMessage" href="javascript:;">createTimerMessage</a></li>
+            <li><a id="createDismissibleMessage" href="javascript:;">createDismissibleMessage</a></li>
+            <li><a id="getAndSetPrefs" href="javascript:;">getAndSetPrefs</a></li>
+            <li><a id="setTitle" href="javascript:;">setTitle</a></li>
+            <li><a id="encodeValues" href="javascript:;">encodeValues</a></li>
+            <li><a id="getProxyUrl" href="javascript:;">getProxyUrl</a></li>
+            <li><a id="getPermissions" href="javascript:;">getPermissions</a></li>
+        </ul>
+    </div>
+    <div id="statetab" class="body-content">
+        <ul>
+            <li><a id="changeProfileImage" href="javascript:;">changeProfileImage</a></li>
+            <li><a id="statetab-fetchviewer-button" href="javascript:;">Viewer</a></li>
+            <li><a id="statetab-fetchowner-button" href="javascript:;">Owner</a></li>
+            <li><a id="statetab-fetchviewerfriends-button" href="javascript:;">Viewer Friends</a></li>
+            <li><a id="statetab-fetchownerfriends-button" href="javascript:;">Owner Friends</a></li>
+            
+            <li><a id="statetab-appdata-button" href="javascript:;">appdata</a></li>
+
+            <li>Enter a user&#39;s ID: <input type="text" id="statetab-fetchbyid-input"></input></li>
+            <li><a id="statetab-fetchbyid-button" href="javascript:;">Person by ID</a></li>
+            <li><a id="statetab-fetchfriendsbyid-button" href="javascript:;">Friends by ID</a></li>
+
+
+            <li><a id="statetab-toogle-osapi" href="javascript:;">old api</a></li>
+        </ul>
+
+    </div>
+
+    <div id="backend" class="body-content">
+        <ul>
+            <li><a id="sendBackendNotification" href="javascript:;">sendBackendNotification</a></li>
+            <li><a id="preloadRequest" href="javascript:;">preloadRequest (only canvas)</a></li>
+            <li><a id="getRequest" href="javascript:;">get makeRequest</a></li>
+            <li><a id="getRequestUnsigned" href="javascript:;">get makeRequest - unsigned</a></li>
+            <li><a id="domRequest" href="javascript:;">get request - dom</a></li>
+            <li><a id="feedRequest" href="javascript:;">get request - feed</a></li>
+            <li><a id="atomRequest" href="javascript:;">get request - atom</a></li>
+            <li><a id="jsonRequest" href="javascript:;">get request - json</a></li>
+            <li><a id="postRequest" href="javascript:;">post makeRequest</a></li>
+            <li><a id="getRequestOsapi" href="javascript:;">get makeRequest Osapi</a></li>
+            <li><a id="postRequestOsapi" href="javascript:;">post makeRequest Osapi</a></li>
+            <li><a id="oauthRequest" href="javascript:;">oauthRequest</a></li>
+        </ul>
+    </div>
+    <div id="substitutions" class="body-content">
+        <ul>
+            <li>ModuleID: __MODULE_ID__</li>
+            <li>Environment: __ENV_CONTAINER__</li>
+            <li>Var 1: __VAR_TEST1__</li>
+            <li>Var 2: __VAR_TEST2__</li>
+            <li>Var 3: __VAR_TEST3__</li>
+            <li>Local title __MSG_title__</li>
+            <li>Local desc __MSG_desc__</li>
+            <li id="prefsCountry"></li>
+            <li id="prefsLang"></li>
+        </ul>
+    </div>
+    <div id="iframe" class="body-content">
+        <iframe id="myiframe" name="myiframe"></iframe>
+        <a id="fillIframe" href="javascript:;">fill iframe</a>
+        <p>Iframe RPC Response:</p>
+        <p id="iframe_response"></p>
+    </div>
+    <div id="os-template" class="body-content">
+        <script type="text/os-template" xmlns:os="http://ns.opensocial.org/2008/markup">
+            <h3>Testing os:Name</h3>
+            <div>Viewer: <os:Name person="${Viewer}"/></div>
+            <div>Owner: <os:Name person="${Owner}"/></div>
+            <h3>Testing os:Badge</h3>
+            <div>Viewer Badge: <os:Badge person="${Viewer}"/></div>
+            <div>Owner Badge: <os:Badge person="${Owner}"/></div>
+            <h3>Testing os:PeopleSelector</h3>
+            <div>Friends PeopleSelector: <os:PeopleSelector group="${ViewerFriends}" multiple="true" max="8" inputName="top8" /></div>
+            <h3>Testing os:If</h3>
+            <os:If condition="${1 == 1}">
+                <div>this should be visible</div>
+            </os:If>
+            <os:If condition="${1 == 2}">
+                <div>this should not be visible</div>
+            </os:If>
+        </script>
+
+        <script type="text/os-template" xmlns:myapp="http://example.com/myapp" tag="myapp:HelloWorld">
+            <div style="color: ${My.MessageStyle.color}">Your message is: ${My.message}, color ${My.MessageStyle.color}</div>
+        </script>
+
+        <script type="text/os-template" xmlns:myapp="http://example.com/myapp" require="Viewer" autoUpdate="true">
+            <h3>Testing calculation</h3>
+            <div>2 + 1 = ${2 + 1}</div>
+            <h3>Testing DataPipelining Access</h3>
+            <div>Hello ${Viewer.displayName}</div>
+            <h3>Testing Localization Access</h3>
+            <div>Lokal: ${Msg.title}</div>
+            <h3>Testing CustomTag</h3>
+            <myapp:HelloWorld message="Hello World">
+                <MessageStyle color="blue"/>
+            </myapp:HelloWorld>
+
+        </script>
+
+        <a href="javascript:;" id="updateViewerTemplate">update DataPipelining Viewer entry</a>
+
+        <h3>Testing external Template Library</h3>
+        <script type="text/os-template" xmlns:abc="http://blablub.com/myapp" xmlns:myapp="http://example.com/myapp">
+            <abc:HelloWorld />
+            <myapp:HelloWorld message="Hello World two">
+                <MessageStyle color="red"/>
+            </myapp:HelloWorld>
+        </script>
+
+        <script type="text/os-template" require="ViewerFriends">
+            <h3>Testing iterations</h3>
+            <ul>
+                <li><b>Viewer Friends:</b></li>
+                <li repeat="${ViewerFriends}">
+                    <span>Showing friend ${Context.Index} of ${Context.Count}:</span>
+                    <span>Name: ${Cur.displayName} Gender: ${Cur.gender}</span>
+                </li>
+                <li><b>Http Friends:</b></li>
+                <li repeat="${httpFriends.result.content.httpFriends}">
+                    <span>Name: ${Cur.name} Hobby: ${Cur.interests}</span>
+                </li>
+            </ul>
+        </script>
+
+        <script type="text/javascript">
+            opensocial.data.DataContext.putDataSet( "fruit", "Apple" );
+        </script>
+
+        <h3>Testing putting data into the current DataContext dynamically, should print "Apple"</h3>
+        <script type="text/os-template" xmlns:abc="http://blablub.com/myapp" xmlns:os="http://ns.opensocial.org/2008/markup" require="fruit" autoUpdate="true">
+            <abc:fruit/>
+        </script>
+    </div>
+    <div class="bg"></div>
+    <div id="log"></div>
+</div>

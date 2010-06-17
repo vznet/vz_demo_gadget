@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messagebundle>
+  <msg name="greeting">
+    <i>Hallo</i>
+  </msg>
+  <msg name="title">
+    &lt;/i&gt;Meine lokalisierte App&lt;/i&gt;
+  </msg>
+  <msg name="desc">
+    <i>Lokalisierungs demo</i>
+  </msg>
+</messagebundle>

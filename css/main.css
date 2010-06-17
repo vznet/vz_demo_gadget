@@ -1,0 +1,10 @@
+div.bg {
+  background-image:url(http://static.pe.studivz.net/20110111-145410/lp/Svz/de/apps/img/os_logo2.png);
+  height: 77px;
+  width: 80px;
+}
+
+div.body-content {
+    height: 200px;
+    overflow: scroll;
+}

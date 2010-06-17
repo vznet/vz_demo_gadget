@@ -1,0 +1,16 @@
+{
+  "httpFriends" : [
+    {
+      "name": "Da&#34;vid",
+      "interests": "Cooking"
+    },
+    {
+      "name": "Charles",
+      "interests": "Hiking"
+    },
+    {
+      "name": "Mary",
+      "interests": "Football"
+    }
+  ]
+}

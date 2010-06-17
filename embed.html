@@ -1,0 +1,53 @@
+<h1>Embedded View</h1>
+<div id="__MODULE_ID__Greeting"></div>
+<a href="javascript:gadgets.views.requestNavigateTo('canvas', {param1: 'abc', param2: 'def'});">navigate to canvas with params</a>
+<a href="javascript:sendMessage();">send private message</a>
+<script type="text/javascript">
+    function sendMessage() {
+        var params = [];
+        params[opensocial.Message.Field.TITLE] = 'VZ-Demo private message title!';
+        params[opensocial.Message.Field.TYPE] = opensocial.Message.Type.PRIVATE_MESSAGE;
+
+        var message = opensocial.newMessage('this is a new message', params);
+        var recipient = "VIEWER";
+        opensocial.requestSendMessage(recipient, message, function(response) {
+            gadgets.log(response.hadError());
+        });
+    }
+    gadgets.util.registerOnLoadHandler(function() {
+        document.getElementById('__MODULE_ID__Greeting').innerHTML = gadgets.views.getParams()['msg'];
+    });
+</script>
+
+<h3>PubSub Controls</h3>
+
+<script type="text/javascript">
+    function callback(sender, message) {
+        document.getElementById("output").innerHTML =
+            "message : " + gadgets.util.escapeString(message + "") + "<br/>" +
+            "sender : " + gadgets.util.escapeString(sender);
+    }
+
+    function subscribe() {
+        gadgets.pubsub.subscribe("random-number", callback);
+    }
+
+    function unsubscribe() {
+        gadgets.pubsub.unsubscribe("random-number");
+        document.getElementById("output").innerHTML = "";
+    }
+
+    function publish() {
+        var message = Math.random();
+        gadgets.pubsub.publish("random-number", message);
+        document.getElementById("output").innerHTML = message;
+    }
+
+</script>
+<div>
+    <input type="button" value="Subscribe" onclick="subscribe()"/>
+    <input type="button" value="Unsubscribe" onclick="unsubscribe()"/>
+    <input type="button" value="Publish a random number" onclick="publish()"/>
+</div>
+<div id="output">
+</div>

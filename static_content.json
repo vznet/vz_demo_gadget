@@ -1,0 +1,28 @@
+{
+    "key_resource_img": {
+        "type": "image",
+        "content": {
+            "src": "http://studi.ohmydollz.com/nx.jpg",
+            "href": "http://study.ohmydollz.com",
+            "title": "title for image link"
+        }
+    },
+    "key_resource_img2": {
+        "type": "image",
+        "content": {
+            "src": "url to image"
+        }
+    },
+    "key_resource_flash": {
+        "type": "flash",
+        "content": {
+            "src": "url to flash"
+        }
+    },
+    "key_resource_rich": {
+        "type": "rich",
+        "content": {
+            "href": "http://www.google.de/images"
+        }
+    }
+}

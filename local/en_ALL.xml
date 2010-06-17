@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messagebundle>
+  <msg name="greeting">
+    Hello
+  </msg>
+  <msg name="title">
+    My localized gadget
+  </msg>
+  <msg name="desc">
+    Message bundle demo
+  </msg>
+</messagebundle>

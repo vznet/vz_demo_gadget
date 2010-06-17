@@ -1,0 +1,53 @@
+<html>
+<head> <title>Cross-Domain Receiver Page</title> </head>
+<body>
+Some Content
+<div id="cb_frame"></div>
+<script src="http://studivz.gadgets.apivz.net/gadgets/js/rpc.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+	function getURLParameter(name)
+	{
+	     name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+	     var regexS = "[\\?&]"+name+"=([^&#]*)";
+	     var regex = new RegExp( regexS );
+	     var results = regex.exec( window.location.href );
+	     if( results == null ) return "";
+	     else return unescape(results[1]);
+	}
+
+    function log(string)
+    {
+        gadgets.rpc.call('..', 'log', null, string);
+    }
+
+   	window.onload = function () {
+
+        var env = getURLParameter('env');
+
+        var relayURL = 'http://';
+        relayURL += env;
+        relayURL += '/gadgets/files/container/rpc_relay.html';
+
+        var rpcToken = getURLParameter('rpctoken');
+
+        log('set relay url in new iframe to: ' + relayURL);
+        log('set rpc token in new iframe to: ' + rpcToken);
+
+        gadgets.rpc.setAuthToken('..', rpcToken);
+        gadgets.rpc.setRelayUrl('..', relayURL);
+        gadgets.rpc.register('blub', function() {
+           log('iframe function blub called');
+        });
+        log('call parent function frameCallback');
+        gadgets.rpc.call('..', "frameCallback", function(value) {
+            log('callback in iframe received');
+            document.getElementById('cb_frame').innerHTML = 'cb received ' + value;
+        }, "my callback parameters");
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Module>
+	<ModulePrefs title="VZnet Demo App" description="This app demonstrates many features available at the VZ OpenSocial container." author_email="opensocial_devsupport@vz.net"
+    icon="http://www.google.com/intl/en_ALL/images/logo.gif"
+    default_privacy="all">
+		<Require feature="opensocial-0.9">
+            <RequiredFields>
+                <Field>name</Field>
+            </RequiredFields>
+        </Require>
+		<Require feature="views" />
+		<Require feature="cache" />
+		<Require feature="tabs" />
+		<Require feature="advertising" />
+		<Require feature="embed" />
+		<Require feature="invite" />
+        <Require feature="setprefs" />
+        <Require feature="minimessage" />
+        <Require feature="settitle" />
+        <Require feature="opensocial-data" />
+        <Require feature="opensocial-templates">
+            <Param name="requireLibrary">templates.xml</Param>
+        </Require>
+        <Require feature="osapi" />
+        <Require feature="vcard" />
+        <Require feature="dynamic-height" />
+        <Require feature="pubsub"/>
+        <Require feature="oauthpopup" />
+
+        <Variable name="TEST1" value="abc" />
+        <Variable name="TEST2" />
+        <Variable name="TEST3" env="sandbox" value="def" />
+        <Variable name="TEST3" env="svz" value="ghi" />
+
+        <Variable name="backend" value="http://opensocial-demo.vz-modules.net/gadget/backend" />
+
+        <Locale messages="local/en_ALL.xml"/>
+        <Locale lang="de" messages="local/de_ALL.xml"/>
+
+        <Preload href="http://opensocial-demo.vz-modules.net/gadget/backend/preload.php" authz="SIGNED" views="canvas" />
+
+        <OAuth>
+          <Service name="MyTwitter">
+            <Request url="https://api.twitter.com/oauth/request_token" param_location="uri-query" />
+            <Access url="https://api.twitter.com/oauth/access_token" param_location="uri-query" />
+            <Authorization url="https://api.twitter.com/oauth/authorize" param_location="uri-query" />
+          </Service>
+        </OAuth>
+
+        <AllowedDomain name="localhost" />
+        <AllowedDomain name="api.twitter.com" />
+
+        <link rel="event.invite" href="http://opensocial-demo.vz-modules.net/gadget/backend/add.php" />
+        <link rel="event.addapp" href="http://opensocial-demo.vz-modules.net/gadget/backend/add.php" />
+        <link rel="event.removeapp" href="http://opensocial-demo.vz-modules.net/gadget/backend/add.php" />
+
+	</ModulePrefs>
+    
+    <UserPref name="name" datatype="string" default_value="old name" />
+
+   
+    <Content type="html" view="profile,canvas,popup" href="canvas.html"></Content>
+    
+    <Content type="html" href="http://opensocial-demo.vz-modules.net/gadget/backend/proxiedContent.php" view="integration" authz="signed">
+        <script xmlns:os="http://ns.opensocial.org/2008/markup" type="text/os-data">
+            <os:ViewerRequest key="Viewer" />
+            <os:HttpRequest key="httpFriends" href="http://opensocial-demo.vz-modules.net/gadget/backend/externalFriends.json" />
+        </script>
+    </Content>
+    
+    <Content type="url" view="group" href="http://opensocial-demo.vz-modules.net/gadget/backend/group.php?mid=__MODULE_ID__" authz="signed">
+    </Content>
+    
+	<Content type="html" view="preview">
+    <![CDATA[
+        <h2>Installiere diesen Hingucker und beschenke deine Freunde</h2>
+        <div id="params"></div>
+        <a href="javascript:;" onclick="vz.invite.install({param1: 'abc', param2: 'def'});">install</a>
+        <script type="text/javascript">
+            gadgets.util.registerOnLoadHandler(function() {
+                document.getElementById('params').innerHTML = '1:' + gadgets.views.getParams()['param1'] + ' 2:' + gadgets.views.getParams()['param2'];
+            });
+        </script>
+    ]]>
+    </Content>
+
+    <Content type="html" view="embedprovider">
+    <![CDATA[
+        <input type="text" id="__MODULE_ID__img" />
+        <input type="text" id="__MODULE_ID__msg" />
+        <a href="javascript:sendMessage()">senden</a>
+
+        <script type="text/javascript">
+
+            function sendMessage()
+            {
+                var params = {img: document.getElementById('__MODULE_ID__img').value, msg:document.getElementById('__MODULE_ID__msg').value};
+                vz.embed.getEmbedUrl(params, function(url) {
+                    vz.embed.send(url);
+                });
+            }
+
+        </script>
+    ]]>
+    </Content>
+
+    <Content type="html" view="embed" href="embed.html"></Content>
+</Module>
