@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Module>
-	<ModulePrefs title="VZnet Demo App" description="This app demonstrates many features available at the VZ OpenSocial container." author_email="opensocial_devsupport@vz.net"
-    icon="http://a1.twimg.com/profile_images/1219792440/VZ_Bookmarklogo_reasonably_small.png"
+	<ModulePrefs title="VZnet Demo App" 
+	description="This app demonstrates many features available at the VZ OpenSocial container."  
+	feed_promotion_text="This app demonstrates many features available at the VZ OpenSocial container."
+	author="VZnet Netzwerke Ltd" 
+	author_email="opensocial_devsupport@vz.net"
+	platform="meinvz+studivz"
+        icon="http://a1.twimg.com/profile_images/1219792440/VZ_Bookmarklogo_reasonably_small.png"
     default_privacy="all">
 		<Require feature="opensocial-0.9">
             <RequiredFields>
