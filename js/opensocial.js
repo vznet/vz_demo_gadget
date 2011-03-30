@@ -102,5 +102,11 @@ vzDemo.opensocial.controller = {
         $('#statetab-osManyFields-button').bind('click', function() {
             vzDemo.opensocial.osManyFields();
         });
+        $('#update-profile-picture').bind('click', function() {
+            var person = opensocial.newPerson({thumbnailUrl : vzDemo.profile_image.image});
+            opensocial.requestUpdateViewer(person, function(response) {
+                log.debug(response);
+            });
+        });
     }
 };
