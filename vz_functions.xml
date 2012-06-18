@@ -63,9 +63,9 @@
     
     <UserPref name="name" datatype="string" default_value="old name" />
     <UserPref name="testEnum" display_name="displayTestEnum" datatype="enum" default_value="0">
-        <EnumValue value="0" display_value="Erste Option"/>
-        <EnumValue value="1" display_value="Zweite Option"/>
-        <EnumValue value="2" display_value="Dritte Option"/>
+        <EnumValue value="1" display_value="Erste Option"/>
+        <EnumValue value="2" display_value="Zweite Option"/>
+        <EnumValue value="3" display_value="Dritte Option"/>
     </UserPref>
 
    
